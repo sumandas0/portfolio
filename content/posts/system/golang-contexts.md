@@ -7,9 +7,11 @@ categories: ["Go"]
 summary: "Learn essential best practices for deploying and maintaining Elasticsearch in production environments."
 ---
 
-Go's concurrency model is powerful, but managing the lifecycle of potentially thousands of goroutines, especially in network servers or complex applications, requires a robust mechanism. Enter the `context`package – a cornerstone of modern Go development for managing cancellation, deadlines, and passing request-scoped data across API boundaries and between goroutines.
+Go's concurrency model is powerful, but managing the lifecycle of potentially thousands of goroutines, especially in network servers or complex applications, requires a robust mechanism. There is the `context`package – a beautiful and powerful tool of modern Go development for managing cancellation, deadlines, and passing request-scoped data across API boundaries and between goroutines. 
 
-This post dives deep into `context.Context`, explaining _why_ it's essential and _how_ to use it effectively. We'll cover:
+This knowledge is pretty known to most Go devs but still documenting it for my own reference and if it helps you, that's great. *Taken a bit of help from LLM to write this post for formatting and some content.*
+
+Will dive deep into `context.Context`, explaining _why_ it's essential and _how_ to use it effectively. We'll cover:
 
 1. **The Basics:** Creating and passing contexts.
 2. **Cancellation:** Gracefully stopping operations.

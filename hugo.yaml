@@ -1,7 +1,7 @@
 baseURL: https://sumandas.me/
 languageCode: en-us
 title: Suman Das
-theme: ["PaperMod"]
+theme: ["PaperModX"]
 
 enableRobotsTXT: true
 buildDrafts: false
