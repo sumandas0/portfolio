@@ -1,0 +1,92 @@
+baseURL: https://sumandas.me/
+languageCode: en-us
+title: Suman Das
+theme: ["PaperMod"]
+
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+params:
+  env: production
+  title: Suman Das
+  description: "Software Engineer & Tech Enthusiast"
+  keywords: [Software Engineer, Portfolio, Projects, Blog]
+  author: Suman Das
+  images: ["<link or path of image for opengraph, twitter-cards>"]
+  DateFormat: "January 2, 2006"
+  defaultTheme: auto
+  disableThemeToggle: false
+
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+  UseHugoToc: false
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: true
+  hidemeta: false
+  hideSummary: false
+  showtoc: false
+  tocopen: false
+
+  profileMode:
+    enabled: true
+    title: Suman Das
+    subtitle: Software Engineer II, Atlan
+    imageUrl: /images/profile.jpeg
+    imageTitle: Suman Das
+    buttons:
+      - name: Projects
+        url: /projects
+      - name: Blog
+        url: /posts
+      - name: About
+        url: /about
+    socialIcons:
+      - name: github
+        url: https://github.com/sumandas0
+      - name: linkedin
+        url: https://linkedin.com/in/sumandas0
+      - name: email
+        url: mailto:contact@sumandas.me
+
+menu:
+  main:
+    - identifier: home
+      name: Home
+      url: /
+      weight: -100
+      params:
+        newTab: false
+    - identifier: projects
+      name: Projects
+      url: /projects
+      weight: -90
+      params:
+        newTab: false
+    - identifier: posts
+      name: Blog
+      url: /posts
+      weight: -80
+      params:
+        newTab: false
+    - identifier: about
+      name: About
+      url: /about
+      weight: -70
+      params:
+        newTab: false
+
+taxonomies:
+  tag: tags
+  category: categories
