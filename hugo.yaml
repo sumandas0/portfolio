@@ -36,8 +36,9 @@ params:
   comments: true
   hidemeta: false
   hideSummary: false
-  showtoc: false
-  tocopen: false
+  showtoc: true
+  tocopen: true
+  
 
   profileMode:
     enabled: true
@@ -59,6 +60,7 @@ params:
         url: https://linkedin.com/in/sumandas0
       - name: email
         url: mailto:contact@sumandas.me
+    
 
 menu:
   main:
