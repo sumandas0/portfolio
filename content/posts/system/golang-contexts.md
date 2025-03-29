@@ -4,7 +4,7 @@ date: 2025-03-29
 draft: false
 tags: ["go", "context", "cancellation", "deadlines"]
 categories: ["Go"]
-summary: "Learn essential best practices for deploying and maintaining Elasticsearch in production environments."
+summary: "Learn how to use Go contexts, cancellation, deadlines, and values to manage goroutine lifecycles and build more resilient systems."
 ---
 
 Go's concurrency model is powerful, but managing the lifecycle of potentially thousands of goroutines, especially in network servers or complex applications, requires a robust mechanism. There is the `context`package – a beautiful and powerful tool of modern Go development for managing cancellation, deadlines, and passing request-scoped data across API boundaries and between goroutines. 
