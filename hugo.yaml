@@ -47,12 +47,12 @@ params:
     imageUrl: /images/profile.jpeg
     imageTitle: Suman Das
     buttons:
-      - name: Projects
-        url: /projects
+      # - name: Projects
+      #   url: /projects
       - name: Blog
         url: /posts
-      - name: About
-        url: /about
+      # - name: About
+      #   url: /about
     socialIcons:
       - name: github
         url: https://github.com/sumandas0
@@ -82,12 +82,12 @@ menu:
       weight: -80
       params:
         newTab: false
-    - identifier: about
-      name: About
-      url: /about
-      weight: -70
-      params:
-        newTab: false
+    # - identifier: about
+    #   name: About
+    #   url: /about
+    #   weight: -70
+    #   params:
+    #     newTab: false
 
 taxonomies:
   tag: tags
