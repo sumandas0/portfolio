@@ -70,12 +70,12 @@ menu:
       weight: -100
       params:
         newTab: false
-    - identifier: projects
-      name: Projects
-      url: /projects
-      weight: -90
-      params:
-        newTab: false
+    # - identifier: projects
+    #   name: Projects
+    #   url: /projects
+    #   weight: -90
+    #   params:
+    #     newTab: false
     - identifier: posts
       name: Blog
       url: /posts
