@@ -1,9 +1,9 @@
 ---
-title: "Raft and Paxos"
-date: 2025-06-09
+title: "Raft and Paxos : A technical walkthrough"
+date: 2025-03-29
 draft: false
-tags: ["distributed system","raft","consensus"]
-categories: ["distributed system"]
+tags: ["distributed-system","raft","consensus"]
+categories: ["distributed-system"]
 summary: "Distributed systems face a fundamental challenge: how can multiple nodes agree on a single value or state when faced with failures, network partitions, and concurrent operations? This is where consensus algorithms come into play."
 ---
 
@@ -113,35 +113,18 @@ function become_candidate():
 
 Google's Chubby lock service uses Paxos at its core. Here's how it works:
 
-```
-┌─────────────────────────────────────────────────────┐
-│                   Chubby Cell                       │
-│                                                     │
-│         Master Election via Paxos                   │
-│              ┌─────────────┐                        │
-│              │   Master    │                        │
-│              │  (Leader)   │                        │
-│              └──────┬──────┘                        │
-│                     │                               │
-│        ┌────────────┴────────────┐                 │
-│        ▼                         ▼                 │
-│  ┌──────────┐             ┌──────────┐            │
-│  │ Replica  │             │ Replica  │            │
-│  └──────────┘             └──────────┘            │
-│                                                     │
-│  Used for:                                          │
-│  • Distributed locks                                │
-│  • Small file storage                               │
-│  • Name service                                     │
-└─────────────────────────────────────────────────────┘
-```
+Chubby uses the Paxos protocol as the core mechanism for ensuring consistency and fault tolerance among its replicated servers. Specifically, Chubby employs Paxos for two critical functions:
+
+**Master Election:** A Chubby cell consists of several server replicas (typically five). These replicas use the Paxos algorithm to agree on which one of them will be the "master." The master is the single replica that handles all client requests. To be elected, a replica must receive votes from a majority of the other replicas.
+
+**Data Replication:** All client write requests are sent to the master. The master then uses the Paxos protocol to propagate these updates to the other replicas. A write is only considered successful and acknowledged to the client after it has been replicated to a majority of the servers. This ensures that the data is durably stored and consistent across the cell, even if some replicas fail.
 
 **Production Systems Using Paxos:**
-- **Google Chubby**: Powers Google's infrastructure locks
-- **Apache Cassandra**: Lightweight transactions use Paxos
-- **Amazon DynamoDB**: Metadata consensus
-- **Microsoft Azure Storage**: Ensures consistent replication
-- **WeChat PaxosStore**: Handles millions of QPS
+- **Google Chubby:** Powers Google's infrastructure locks
+- **Apache Cassandra:** Lightweight transactions use Paxos
+- **Amazon DynamoDB:** Metadata consensus
+- **Microsoft Azure Storage:** Ensures consistent replication
+- **WeChat PaxosStore:** Handles millions of QPS
 
 ## Raft: The Understandable Alternative
 
@@ -191,30 +174,44 @@ Leader: [1:A] [2:B] [2:C] [2:D] [3:E]
 
 Apache Kafka's migration from ZooKeeper to KRaft showcases Raft's practical advantages:
 
+Here's how Kafka leverages KRaft:
+
 ```
-┌─────────────────────────────────────────────────────┐
-│              Kafka Cluster (KRaft Mode)             │
-│                                                     │
-│  Controller Quorum (Raft Consensus)                 │
-│  ┌─────────┐  ┌─────────┐  ┌─────────┐           │
-│  │ Ctrl 1  │  │ Ctrl 2  │  │ Ctrl 3  │           │
-│  │(Leader) │  │(Follow) │  │(Follow) │           │
-│  └────┬────┘  └────┬────┘  └────┬────┘           │
-│       └────────────┼────────────┘                  │
-│                    │                                │
-│            Metadata Log:                            │
-│            • Topics/Partitions                      │
-│            • Broker membership                      │
-│            • Configurations                         │
-│            • ACLs                                   │
-│                    │                                │
-│       ┌────────────┴────────────┐                  │
-│       ▼            ▼            ▼                  │
-│  ┌─────────┐ ┌─────────┐ ┌─────────┐             │
-│  │ Broker 1│ │ Broker 2│ │ Broker 3│             │
-│  └─────────┘ └─────────┘ └─────────┘             │
-└─────────────────────────────────────────────────────┘
++-------------------------+
+|     Quorum Controller   |
+|      (Active Leader)    |
+|                         |
+|   [Writes Metadata      |
+|    Changes as Events]   |
++-----------+-------------+
+            |
+            | Write Events
+            v
++-----------------------------------+
+|    Internal Topic (Event Log)     |
+| KRaft Protocol Replicated Log     |
+|                                   |
+| [Event 1][Event 2][Event 3]...   |
++-----------------------------------+
+            |
+            | Replicate Events
+            +-----------------------+
+            |                       |
+            v                       v
++-----------+-------------+ +-----------+-------------+
+|     Quorum Controller   | |     Quorum Controller   |
+|         (Follower)      | |         (Follower)      |
+|                         | |                         |
+|   [Applies Events in   | |   [Applies Events in   |
+|     the same order]     | |     the same order]     |
++-------------------------+ +-------------------------+
+
 ```
+
+
+***Fast Failover*** If the Active Leader fails, a Follower with the
+up-to-date replicated log is quickly elected
+as the new Active Leader.
 
 **Production Systems Using Raft:**
 - **etcd**: Kubernetes' brain for configuration

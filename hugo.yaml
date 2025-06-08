@@ -44,7 +44,7 @@ params:
     enabled: true
     title: Suman Das
     subtitle: Software Engineer II, Atlan
-    imageUrl: /images/profile.jpeg
+    imageUrl: /public/images/profile.jpeg
     imageTitle: Suman Das
     buttons:
       # - name: Projects
