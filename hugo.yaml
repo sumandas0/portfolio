@@ -44,7 +44,7 @@ params:
     enabled: true
     title: Suman Das
     subtitle: Software Engineer II, Atlan
-    imageUrl: /public/images/profile.jpeg
+    imageUrl: https://avatars.githubusercontent.com/u/59254445?v=4
     imageTitle: Suman Das
     buttons:
       # - name: Projects
