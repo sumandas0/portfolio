@@ -92,3 +92,7 @@ menu:
 taxonomies:
   tag: tags
   category: categories
+
+services:
+  googleAnalytics:
+    id: G-58XQ6M2J00
